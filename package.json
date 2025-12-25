@@ -1,0 +1,24 @@
+{
+  "name": "todolist-supabase",
+  "version": "1.0.0",
+  "description": "TodoList API with Supabase",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test:api": "node scripts/test-api.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "form-data": "^4.0.5",
+    "next": "^12.3.4",
+    "openai": "^6.15.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
