@@ -1,0 +1,97 @@
+---
+description: 项目代码结构映射
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# 项目代码结构
+
+## 目录结构说明
+
+```
+to-do-list/
+├── pages/                    # Next.js 页面和 API 路由
+│   ├── _app.tsx             # 应用入口点，全局样式导入
+│   ├── index.tsx            # 前端首页（待办事项列表页面）
+│   └── api/                 # API 路由目录
+│       └── tasks/           # 任务相关 API
+│           ├── index.ts     # 处理 GET/POST 请求，路径: /api/tasks
+│           ├── [id].ts      # 处理 PATCH/DELETE 请求，路径: /api/tasks/[id]
+│           └── breakdown.ts # 处理 POST 请求，路径: /api/tasks/breakdown
+│
+├── lib/                      # 工具库和配置
+│   ├── config.ts            # 环境变量配置（API_BASE_URL、APP_ID、DeepSeek 配置）
+│   └── supabase.ts          # Supabase 客户端初始化
+│
+├── types/                    # TypeScript 类型定义
+│   └── task.ts              # 任务相关类型定义
+│
+├── styles/                   # 全局样式
+│   └── globals.css          # Tailwind CSS 和自定义样式
+│
+├── scripts/                  # 脚本文件
+│   └── test-api.js          # API 接口测试脚本
+│
+├── .cursor/                  # Cursor IDE 配置
+│   └── rules/               # Cursor 规则文件
+│       └── project/         # 项目规则
+│           ├── style.mdc    # 代码风格规范
+│           └── codemap.mdc  # 项目结构映射（本文件）
+│
+├── node_modules/             # 依赖包（自动生成，已忽略）
+├── .next/                    # Next.js 构建输出（自动生成，已忽略）
+│
+├── package.json              # 项目配置和依赖
+├── package-lock.json         # 依赖锁定文件
+├── tsconfig.json             # TypeScript 配置
+├── next.config.js            # Next.js 配置
+├── tailwind.config.cjs       # Tailwind CSS 配置（如果使用）
+├── postcss.config.cjs        # PostCSS 配置（如果使用）
+├── supabase-schema.sql       # Supabase 数据库表结构 SQL
+├── env.example               # 环境变量示例文件
+└── .gitignore                # Git 忽略文件配置
+```
+
+## 文件职责说明
+
+### Pages 目录
+- **`pages/_app.tsx`**: Next.js 应用入口，用于导入全局样式和配置
+- **`pages/index.tsx`**: 前端首页，显示待办事项列表
+- **`pages/api/tasks/index.ts`**: 
+  - `GET /api/tasks` - 获取所有任务（按创建时间倒序）
+  - `POST /api/tasks` - 创建新任务
+- **`pages/api/tasks/[id].ts`**: 
+  - `GET /api/tasks/:id` - 获取单个任务（包含子任务）
+  - `PATCH /api/tasks/:id` - 更新任务状态
+  - `DELETE /api/tasks/:id` - 删除任务
+- **`pages/api/tasks/breakdown.ts`**: 
+  - `POST /api/tasks/breakdown` - AI 拆解任务为子任务
+
+### Lib 目录
+- **`lib/config.ts`**: 统一管理环境变量配置（Supabase、DeepSeek API 等）
+- **`lib/supabase.ts`**: Supabase 客户端实例化
+
+### Types 目录
+- **`types/task.ts`**: 
+  - `Task` - 任务实体接口
+  - `CreateTaskRequest` - 创建任务请求接口
+  - `UpdateTaskRequest` - 更新任务请求接口
+  - `ApiResponse<T>` - 通用 API 响应类型
+
+### Scripts 目录
+- **`scripts/test-api.js`**: API 接口自动化测试脚本
+
+## 技术栈
+
+- **框架**: Next.js 12+
+- **语言**: TypeScript + JavaScript
+- **数据库**: Supabase (PostgreSQL)
+- **AI 服务**: DeepSeek API（通过聚合平台）
+- **样式**: CSS-in-JS (styled-jsx) + 内联样式
+
+## 重要约定
+
+1. **API 路由**: 统一使用 TypeScript，返回格式为 `{ success, data, error }`
+2. **类型定义**: 所有类型定义放在 `types/` 目录
+3. **配置管理**: 环境变量统一在 `lib/config.ts` 中管理
+4. **测试脚本**: API 测试脚本放在 `scripts/` 目录

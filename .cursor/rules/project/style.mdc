@@ -1,0 +1,35 @@
+---
+description: 项目代码风格规范
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: true
+---
+
+# 代码风格规范
+
+## 缩进与格式
+- 使用 2 个空格缩进, 禁止使用制表符
+- 单行最大长度 120 字符
+- 语句末尾必须加分号
+- 使用单引号包裹字符串
+
+## 命名约定
+- 变量和函数: `camelCase` (如 `userName`、`fetchData`)
+- 组件和类: `PascalCase` (如 `UserProfile`、`DataService`)
+- 常量: `UPPER_SNAKE_CASE` (如 `API_BASE_URL`)
+- 接口和类型: `PascalCase` (如 `UserData`、`ButtonProps`)
+
+## TypeScript 规范
+- 启用严格模式 (`strict: true`)
+- 禁止使用 `any` 类型
+- 所有函数参数和返回值必须显式声明类型
+- 使用 `interface` 定义对象类型
+
+## 导入规范
+- 导入语句按类型分组排序: 第三方库 → 项目内部模块 → 相对路径
+- 按需导入, 避免导入未使用的模块
+- 使用路径别名 (如 `@/components/Button`)
+
+## 注释规范
+- 公共 API 必须添加 JSDoc 注释
+- 复杂逻辑需添加行内说明
+- 使用 `TODO`、`FIXME` 标记待处理项
